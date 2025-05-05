@@ -22,4 +22,4 @@ jobs:
       run: dotnet build -c Release
     #  run: dotnet build --no-restore -c Release
     - name: Publish Cosmos.Metrics Nuget Package
-      run: dotnet nuget push /home/runner/work/Cosmos.Metrics/Cosmos.Metrics/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+      run: dotnet nuget push /home/runner/work/Cosmos.Metrics/Cosmos.Metrics/Cosmos.Metrics/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
