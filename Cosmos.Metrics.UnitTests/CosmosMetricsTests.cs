@@ -114,13 +114,15 @@ namespace Cosmos.Metrics.UnitTests
 
             Assert.IsNotNull(results);
 
-            var sumBytes = results.Sum(s => s.Bytes);
+            var sumBytes = results.Sum(s => s.ResponseBytes);
+            var sumRBytes = results.Sum(s => s.RequestBytes);
 
             var hostCount = results.Select(s => s.Host).Distinct().Count();
 
             var days = results.Select(s => s.Date).Distinct().Count();
 
             Assert.IsTrue(sumBytes > 0);
+            Assert.IsTrue(sumRBytes > 0);
             Assert.IsTrue(hostCount > 0);
             Assert.IsTrue(days > 0);
         }

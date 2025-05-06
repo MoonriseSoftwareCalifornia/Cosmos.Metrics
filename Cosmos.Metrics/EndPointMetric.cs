@@ -25,7 +25,12 @@ namespace Cosmos.Metrics
         /// <summary>
         /// Gets or sets the total response bytes for the date indicated.
         /// </summary>
-        public long? Bytes { get; set; }
+        public long? ResponseBytes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the total request bytes for the date indicated.
+        /// </summary>
+        public long? RequestBytes { get; set; }
 
         /// <summary>
         /// Gets or sets the host header.

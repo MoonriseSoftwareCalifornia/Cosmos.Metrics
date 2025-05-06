@@ -17,8 +17,7 @@
         private readonly string query = @"
             AzureDiagnostics
             | where ResourceProvider == 'MICROSOFT.CDN' and Category == 'FrontDoorAccessLog'
-            | summarize ResponseBytes = sum(tolong(responseBytes_s)) by Date = format_datetime(endofday(bin(TimeGenerated, 1d)), 'yyyy-MM-dd'), Hostname = hostName_s";
-
+            | summarize RequestBytes = sum(tolong(requestBytes_s)), ResponseBytes = sum(tolong(responseBytes_s)) by Date = format_datetime(endofday(bin(TimeGenerated, 1d)), 'yyyy-MM-dd'), Hostname = hostName_s";
 
         /// <summary>
         ///  Creates an instance of the FrontDoorEndpointMetrics class with the specified parameters.
@@ -78,7 +77,8 @@
                     data.Add( new EndPointMetric
                     {
                         Date = DateOnly.FromDateTime(DateTime.Parse(row["Date"].ToString())),
-                        Bytes = row["ResponseBytes"] == null ? 0 : long.Parse(row["ResponseBytes"].ToString()),
+                        ResponseBytes = row["ResponseBytes"] == null ? 0 : long.Parse(row["ResponseBytes"].ToString()),
+                        RequestBytes = row["RequestBytes"] == null ? 0 : long.Parse(row["RequestBytes"].ToString()),
                         Host = row["Hostname"] == null ? "" : row["Hostname"].ToString()
                     });
                 }
